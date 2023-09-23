@@ -1,0 +1,1 @@
+from skill_chain.trainer.vectorized_gym_env import CustomVectorEnvFactory

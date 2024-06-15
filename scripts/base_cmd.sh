@@ -1,0 +1,21 @@
+python skill_chain/run.py \
+--config-path=configs \
+--config-name="aux_distill/$task_name.yaml" \
+habitat_baselines.writer_type=wb \
+habitat_baselines.wb.project_name=$PROJ_NAME \
+habitat_baselines.wb.entity=skillchainz \
+habitat_baselines.trainer_name=aux_trainer \
+habitat_baselines.wb.run_name="$task_name" \
+habitat_baselines.num_environments=24 \
+habitat_baselines.total_num_steps=5.0e8 \
+habitat_baselines.checkpoint_folder="data/ckpts/$task_name" \
+habitat_baselines.rl.ddppo.backbone=resnet50 \
++habitat_baselines.rl.policy.main_agent.use_one_hot_critic=False \
++habitat_baselines.rl.ppo.use_norm_returns=True \
+habitat_baselines.rl.ppo.lr=0.0003 \
++habitat_baselines.rl.policy.main_agent.use_mask_sensors=True \
++habitat_baselines.rl.policy.main_agent.use_task_specific_head=True \
++habitat_baselines.rl.policy.main_agent.use_pop_art_norm=True \
++habitat_baselines.rl.policy.main_agent.beta_decay=0.0003 \
+habitat.task.lab_sensors.env_task_sensor.max_skills=11 \
+env_tasks.skills.nav_pick_nav_place.update_rl_params.gamma=0.999  "$@"

@@ -1,0 +1,22 @@
+task_id: 11
+type: MonoRearrangePickTask-v0
+reward_measure: pick_reward
+success_measure: pick_success
+env_task_gym_id: "HabitatPick"
+task_spec_base_path: ""
+task_spec: ""
+update_measures:
+  dataset:
+    data_path: "data/datasets/replica_cad/rearrange/v1/{split}/kitchen_counter_:0000_rearrange.json.gz"
+  task.measurements.mono_nav_to_obj_success: 
+    must_call_stop: False 
+max_episode_steps: 300
+measures_list: 
+  - "pick_reward"
+  - "pick_success"
+  - "ee_to_object_distance.0"
+  - "ee_to_rest_distance"
+  - "force_terminate"
+  - "reward"
+  - "did_pick_object"
+  - "num_steps"

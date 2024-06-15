@@ -1,0 +1,25 @@
+task_id: 4
+type: CustomRearrangePddlTask-v0
+reward_measure: place_reward
+success_measure: place_success
+env_task_gym_id: "HabitatNavPlaceTask"
+task_spec_base_path: "skill_chain/pddl"
+task_spec: "nav_place"
+update_measures: 
+  dataset:
+    data_path: "data/datasets/replica_cad/rearrange/v1/{split}/rearrange_easy.json.gz"
+  simulator:
+    robot_joint_start_noise: 0.2
+  task.measurements.mono_nav_to_obj_success: 
+    must_call_stop: False
+max_episode_steps: 700
+measures_list: 
+  - "place_reward"
+  - "place_success"
+  - "ee_to_goal_distance.0"
+  - "num_steps"
+  - "force_terminate"
+  - "reward"
+  - "ee_to_rest_distance"
+  - "obj_at_goal.0"
+  - "num_steps"

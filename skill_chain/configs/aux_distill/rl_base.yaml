@@ -1,0 +1,132 @@
+# @package _global_
+defaults:
+  - /habitat: habitat_config_base
+  - /habitat/task: custom_task_config_base
+  - /habitat/simulator: rearrange_sim
+  - /habitat/simulator/sensor_setups@habitat.simulator.agents.main_agent: depth_head_agent
+  - /habitat/task/rearrange/actions: fetch_suction_arm_base
+  - /habitat/simulator/agents@habitat.simulator.agents.main_agent: fetch_suction
+  - /habitat/dataset/rearrangement: replica_cad
+  - /habitat/task/measurements:
+    - articulated_agent_force
+    - force_terminate
+    # Pick measures # 
+    - end_effector_to_rest_distance
+    - end_effector_to_object_distance
+    - did_pick_object
+    - pick_success
+    - pick_reward
+    - did_violate_hold_constraint
+    - num_steps
+    - end_effector_to_goal_distance
+    - pick_obj_measure
+    - pick_correct_obj_measure
+    - pick_marker_measure
+    # Place Measures #
+    - object_to_goal_distance
+    - obj_at_goal
+    - place_reward
+    - place_success
+    # - does_want_terminate
+    - wrong_pick_measure
+    - wrong_pick_marker_measure
+    # Composite PDDL measurements #
+    - diff_joint_velocity
+    - move_objects_reward
+    - composite_pddl_success
+    - obj_at_goal_pddl_success
+    - mono_pddl_stage_goals
+    # Navigation parameters # 
+    - rot_dist_to_goal
+    - dist_to_goal
+    - nav_to_pos_succ
+    - mono_nav_to_obj_success
+    - mono_nav_to_obj_reward
+    # Articulated Sensors # 
+    - is_art_measure
+    - all_rank_is_art_measure
+    - art_obj_state
+    - art_obj_at_desired_state
+    - art_success_pos
+    - ee_dist_to_marker
+    - art_obj_success
+    - art_obj_reward
+    # - mono_allowed_skills
+    - env_task_measure
+    # - hier_skill_measure
+    - task_stage_steps
+    - did_open_art_receptacle
+    - did_nav_to_obj_success
+    - did_nav_to_pos_success
+  # - /habitat/task/lab_sensors:
+  #   - target_start_sensor
+  #   - goal_sensor
+  #   - nav_goal_sensor
+  #   - joint_sensor
+  #   - is_holding_sensor
+  #   - end_effector_sensor
+  #   - relative_resting_pos_sensor
+  #   - env_task_sensor
+  #   - is_art_sensor
+  #   - hier_skill_sensor
+  #   - meta_hier_skill_sensor
+  #   - marker_rel_pos_sensor
+  #   - joint_velocity_sensor
+    # - one_hot_target_sensor
+  - _self_
+
+habitat:
+  environment:
+    max_episode_steps: 1000 
+  task:
+    type: RearrangePickTask-v0
+    base_angle_noise: 0.523599
+    should_prevent_drop: True
+    constraint_violation_ends_episode: False
+    constraint_violation_drops_object: True
+    reward_measure: "pick_reward"
+    success_measure: "pick_success"
+    success_reward: 10.0
+    slack_reward: -0.005
+    end_on_success: True
+    # lab_sensors:
+      # env_task_sensor: 
+        # type: EnvTaskSensor
+        # max_skills: 15
+    measurements:
+      # art_obj_at_desired_state:
+        # use_absolute_distance: false
+      force_terminate:
+        max_accum_force: -1.0
+        max_instant_force: 10_000.0
+      pick_reward: 
+        drop_obj_should_end: False
+        force_pen: 0.0
+        max_force_pen: 0.0
+        force_end_pen: 0.0
+      place_reward:
+        force_end_pen: 0.0
+        max_force_pen: 0.0
+        constraint_violate_pen: 0.0
+      move_objects_reward:
+        force_end_pen: 0.0
+        max_force_pen: 0.0
+        constraint_violate_pen: 0.0
+      mono_nav_to_obj_reward:
+        max_force_pen: 0.0
+        force_end_pen: 0.0
+        constraint_violate_pen: 0.0
+      art_obj_reward: 
+        max_force_pen: 0.0
+        force_end_pen: 0.0
+        constraint_violate_pen: 0.0
+      # art_obj_reward:
+      #   type: MonoArtObjReward
+      #   wrong_grasp_end: True
+      #   grasp_reward: 5.0
+      #   marker_dist_reward: 1.0
+      #   ee_dist_reward: 1.0
+      #   constraint_violate_pen: 1.0
+  dataset:
+    data_path: data/datasets/replica_cad/rearrange/v1/{split}/rearrange_easy.json.gz
+

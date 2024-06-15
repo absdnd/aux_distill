@@ -1,0 +1,66 @@
+defaults: 
+  - /habitat_baselines: habitat_baselines_rl_config_base
+  # - /habitat: habitat_config_base
+  # - /habitat/task: custom_task_config_base
+  # - /habitat/task/measurements: 
+  # - /aux_distill/env_tasks/skills/lang_pick: config
+  # - /aux_distill/env_tasks/skills/lang_pick_prox: config
+  # - /aux_distill/env_tasks/skills/pick: config
+  - rl_auxdistill
+  - /habitat/task/lab_sensors:
+    - target_start_sensor
+    - goal_sensor
+    - nav_goal_sensor
+    - joint_sensor
+    - is_holding_sensor
+    - end_effector_sensor
+    - relative_resting_pos_sensor
+    - env_task_sensor
+    - is_art_sensor
+    - hier_skill_sensor
+    - meta_hier_skill_sensor
+    - joint_velocity_sensor
+  # - /aux_distill/tasks@habitat: rearrange_task
+  - _self_  
+
+env_tasks:
+  allowed_skills: ['nav_pick','nav_place','nav_open_fridge','open_fridge_pick','nav_open_cabinet','nav_pick_nav_place']
+
+habitat_baselines: 
+  num_environments: 24
+  total_num_steps: 5.0e8
+  num_checkpoints: 50
+  rl: 
+    ppo: 
+      lr: 0.0003
+      # +use_norm_returns: True 
+    # policy:
+    #   main_agent: 
+    #     +use_one_hot_critic: False
+    #     +use_mask_sensors: True
+    #     +use_task_specific_head: True
+    #     +use_pop_art_norm: True
+    #     +beta_decay: 0.0003
+
+habitat: 
+  gym: 
+    obs_keys: 
+      - "obj_start_sensor"
+      - "obj_goal_sensor"
+      - "head_depth"
+      - "joint"
+      - "ee_pos"
+      - "is_holding"
+      - "relative_resting_position"
+      - "env_task_id_sensor"
+      - "is_art_sensor"
+      - "hier_skill_sensor"
+  dataset: 
+    data_path: data/datasets/replica_cad/rearrange/v1/train/easy_hard.json.gz
+  task: 
+    measurements:
+      task_stage_steps:
+        type: "MonoTaskStageSteps"
+    lab_sensors:
+      env_task_sensor:
+        type: "EnvTaskSensor"

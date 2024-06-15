@@ -1,0 +1,20 @@
+gym: 
+  obs_keys:
+    - "one_hot_target_sensor"
+    - "obj_start_sensor"
+    - "head_rgb"
+    - "joint"
+    - "is_holding"
+    - "relative_resting_position"
+    - "env_task_id_sensor"
+    - "hier_skill_sensor"
+dataset: 
+  data_path: data/datasets/replica_cad/rearrange/v1/{split}/rearrange_easy.json.gz
+task: 
+  measurements:
+    task_stage_steps:
+      type: "MonoTaskStageSteps"
+  # lab_sensors:
+  #   env_task_sensor:
+  #     type: "EnvTaskSensor"
+  #     max_skills: 15

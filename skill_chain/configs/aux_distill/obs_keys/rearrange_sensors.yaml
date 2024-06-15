@@ -1,0 +1,10 @@
+  - obj_start_sensor
+  - obj_goal_sensor
+  - head_depth
+  - joint
+  - ee_pos
+  - is_holding
+  - relative_resting_position
+  - env_task_id_sensor
+  - is_art_sensor
+  - hier_skill_sensor

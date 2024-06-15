@@ -1,0 +1,23 @@
+task_id: 1
+type: MonoRearrangePlaceTask-v0
+reward_measure: place_reward
+success_measure: place_success
+env_task_gym_id: "HabitatPlace"
+task_spec_base_path: ""
+task_spec: ""
+update_measures:
+  dataset:
+    data_path: "data/datasets/replica_cad/rearrange/v1/{split}/rearrange_easy.json.gz"
+  task.measurements.mono_nav_to_obj_success: 
+    must_call_stop: False
+max_episode_steps: 300
+measures_list: 
+  - "place_reward"
+  - "place_success"
+  - "ee_to_goal_distance.0"
+  - "num_steps"
+  - "force_terminate"
+  - "reward"
+  - "ee_to_rest_distance"
+  - "obj_at_goal.0"
+  - "num_steps"

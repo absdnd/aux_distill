@@ -1,0 +1,24 @@
+task_id: 12
+type: CustomRearrangePddlTask-v0
+reward_measure: pick_reward
+success_measure: pick_success
+env_task_gym_id: "HabitatPick"
+task_spec_base_path: "skill_chain/pddl"
+task_spec: "nav_open_cab_pick"
+update_measures:
+  dataset:
+    data_path: "data/datasets/replica_cad/rearrange/v1/train/kitchen_counter_:0000_closed_rearrange.json.gz"
+  task.measurements.mono_nav_to_obj_success: 
+    must_call_stop: False 
+  task:measurements.force_terminate:
+      max_instant_force: 30_000.0
+max_episode_steps: 800
+measures_list: 
+  - "pick_reward"
+  - "pick_success"
+  - "ee_to_object_distance.0"
+  - "ee_to_rest_distance"
+  - "force_terminate"
+  - "reward"
+  - "did_pick_object"
+  - "num_steps"

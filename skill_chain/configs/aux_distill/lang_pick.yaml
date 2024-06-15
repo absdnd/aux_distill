@@ -1,0 +1,68 @@
+defaults: 
+  - /habitat_baselines: habitat_baselines_rl_config_base
+  - /habitat: habitat_config_base
+  - /habitat/task: custom_task_config_base
+  # - /habitat/task/measurements: 
+  # - /aux_distill/env_tasks/skills/lang_pick: config
+  # - /aux_distill/env_tasks/skills/lang_pick_prox: config
+  # - /aux_distill/env_tasks/skills/pick: config
+  - rl_auxdistill
+  - /habitat/task/lab_sensors:
+    - target_start_sensor
+    - goal_sensor
+    - nav_goal_sensor
+    - joint_sensor
+    - is_holding_sensor
+    - end_effector_sensor
+    - relative_resting_pos_sensor
+    - env_task_sensor
+    - is_art_sensor
+    - hier_skill_sensor
+    - meta_hier_skill_sensor
+    - marker_rel_pos_sensor
+    - joint_velocity_sensor
+    - one_hot_target_sensor
+  - _self_  
+
+env_tasks:
+  allowed_skills: ["pick","lang_pick_prox"]
+  
+habitat_baselines: 
+  num_environments: 14
+  total_num_steps: 3.0e8
+  num_checkpoints: 30
+  eval_keys_to_include_in_name: ['composite_pddl_success','pick_obj_measure','is_art_measure']
+  rl: 
+    ppo: 
+      lr: 0.0002
+      # +use_norm_returns: True 
+    # policy:
+    #   main_agent: 
+    #     +use_one_hot_critic: False
+    #     +use_mask_sensors: True
+    #     +use_task_specific_head: True
+    #     +use_pop_art_norm: True
+    #     +beta_decay: 0.0003
+
+habitat: 
+  gym: 
+    obs_keys: 
+      - "one_hot_target_sensor"
+      - "obj_start_sensor"
+      - "head_rgb"
+      - "joint"
+      - "is_holding"
+      - "relative_resting_position"
+      - "env_task_id_sensor"
+      - "hier_skill_sensor"
+  dataset: 
+    data_path: data/datasets/replica_cad/rearrange/v1/train/rearrange_easy.json.gz
+  task: 
+    measurements:
+      task_stage_steps:
+        type: "MonoTaskStageSteps"
+        # force_early_end: False
+    lab_sensors:
+      env_task_sensor:
+        type: "EnvTaskSensor"
+        # max_skills: 15

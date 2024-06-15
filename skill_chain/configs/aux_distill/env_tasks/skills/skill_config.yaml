@@ -1,0 +1,28 @@
+nav_pick:
+  task_id: 2
+  type: CustomRearrangePddlTask-v0
+  reward_measure: pick_reward
+  success_measure: pick_success
+  env_task_gym_id: "HabitatNavPickTask"
+  task_spec_base_path: "skill_chain/pddl"
+  task_spec: "nav_pick"
+  update_measures:
+    dataset:
+      data_path: "data/datasets/replica_cad/rearrange/v1/{split}/rearrange_easy.json.gz"
+    # task.measurements.pddl_success: 
+      # must_call_stop: False
+    task.measurements.mono_nav_to_obj_success: 
+      must_call_stop: False
+  max_episode_steps: 700
+  measures_list: 
+    - "pick_obj_measure"
+    - "pick_correct_obj_measure"
+    - "pick_reward"
+    - "pick_success"
+    - "did_pick_object"
+    - "ee_to_object_distance.0"
+    - "num_steps"
+    - "reward"
+    - "force_terminate"
+    # - "does_want_terminate" 
+    - "mono_nav_to_obj_success"

@@ -15,7 +15,11 @@ from habitat_baselines.common.baseline_registry import baseline_registry
 from habitat_baselines.config.default_structured_configs import \
     HabitatBaselinesConfigPlugin
 
+
+import sys
+sys.path.append(os.getcwd())
 import skill_chain.trainer
+from skill_chain import default_structured_configs
 
 gym.logger.set_level(40)
 

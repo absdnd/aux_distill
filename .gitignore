@@ -5,7 +5,8 @@ __pycache__/
 
 # C extensions
 *.so
-
+batch_scripts/
+batch_configs/
 # Distribution / packaging
 .Python
 build/
@@ -14,6 +15,7 @@ develop-eggs/
 dist/
 downloads/
 eggs/
+bkp/
 .eggs/
 lib/
 lib64/
@@ -27,6 +29,12 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+*.pdf
+*.csv
+wandb*
+data*
+outputs*
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -132,3 +140,6 @@ project_diffusion_rl/.DS_Store
 .DS_Store
 
 data
+bin
+v3_sc3_staging*
+git-filter-repo

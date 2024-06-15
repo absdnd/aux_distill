@@ -1,0 +1,56 @@
+task_id: 5
+type: CustomRearrangePddlTask-v0
+reward_measure: move_obj_reward
+success_measure: composite_pddl_success
+env_task_gym_id: "HabitatRearrangeTask"
+task_spec_base_path: "skill_chain/pddl"
+task_spec: "rearrange_easy"
+update_rl_params:
+  gamma: 0.99
+update_measures: 
+  task: 
+    slack_reward: 0.005
+    measurements: 
+      force_terminate:
+        max_instant_force: 30_000.0
+  task.measurements.art_obj_at_desired_state: 
+    use_absolute_distance: False
+  task.measurements.art_obj_reward:
+    type: MonoArtObjReward
+    wrong_grasp_end: True
+    grasp_reward: 5.0
+    art_at_desired_state_reward: 5.0
+    marker_dist_reward: 1.0
+  task.measurements.mono_nav_to_obj_success: 
+    must_call_stop: False
+max_episode_steps: 1500
+log_art_list: ["kitchen_counter", "fridge", "easy", "hard"]
+exclude_measures: []
+measures_list:
+  - "pick_reward"
+  - "pick_success"
+  - "place_reward"
+  - "place_success"
+  - "ee_to_object_distance.0"
+  - "ee_to_goal_distance.0"
+  - "object_to_goal_distance.0"
+  - "num_steps"
+  - "force_terminate"
+  - "reward"
+  - "ee_to_rest_distance"
+  - "did_pick_object"
+  - "obj_at_goal.0"
+  - "num_steps"
+  - "composite_pddl_success"
+  - "obj_at_goal_pddl_success"
+  - "wrong_pick_measure"
+  - "wrong_pick_marker_measure"
+  - "art_obj_at_desired_state"
+  - "pick_obj_measure"
+  - "pick_marker_measure"
+  - "task_stage_steps.nav_pick"
+  - "task_stage_steps.nav_place"
+  - "task_stage_steps.nav_open_fridge"
+  - "task_stage_steps.nav_open_cabinet"
+  - "task_stage_steps.open_cab_pick"
+  # - "is_art_measure"

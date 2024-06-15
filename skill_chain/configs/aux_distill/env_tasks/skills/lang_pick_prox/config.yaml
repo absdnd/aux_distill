@@ -1,0 +1,38 @@
+task_id: 14
+type: "LangPickTaskProx-v0"
+reward_measure: pick_reward
+success_measure: pick_success
+pddl_def:
+  start_template: []
+  expr_type: AND
+  goal_template:
+    expr_type: holding(goal0|0, robot_0)
+  sample_entities:
+    obj:
+      type: movable_entity_type 
+env_task_gym_id: "HabitatPick"
+task_spec_base_path: skill_chain/pddl
+task_spec: "nav_pick"
+pddl_domain_def: "skill_chain/pddl/"
+update_measures:
+  task:
+    measurements:
+      force_terminate:
+        max_instant_force: 10_000.0
+  dataset:
+    data_path: "data/datasets/replica_cad/rearrange/v1/{split}/rearrange_easy.json.gz"
+  task.measurements.mono_nav_to_obj_success: 
+    must_call_stop: False 
+max_episode_steps: 300
+measures_list: 
+  - "pick_obj_measure"
+  - "pick_correct_obj_measure"
+  - "pick_reward"
+  - "pick_success"
+  - "ee_to_object_distance.0"
+  - "ee_to_rest_distance"
+  - "force_terminate"
+  - "reward"
+  - "did_pick_object"
+  - "pick_obj_measure"
+  - "num_steps"

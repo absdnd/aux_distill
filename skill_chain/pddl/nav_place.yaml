@@ -1,0 +1,18 @@
+init: 
+  - holding(goal0|0, robot_0)
+objects:
+  - name: goal0|0
+    expr_type: movable_entity_type
+  - name: TARGET_goal0|0
+    expr_type: goal_entity_type
+  - name: robot_0
+    expr_type: robot_entity_type
+
+stage_goals: {}
+
+goal:
+  expr_type: AND
+  sub_exprs:
+    - at(goal0|0,TARGET_goal0|0)
+    - not_holding(robot_0)
+

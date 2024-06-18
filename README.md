@@ -16,9 +16,10 @@ trained skills and expert demonstrations.
 
 # Installation 
 - `mamba create -n hab_sc -y python=3.9`
-- `mamba install -y habitat-sim withbullet headless -c conda-forge -c aihabitat`
+- `mamba install -y habitat-sim==0.3.0 withbullet headless -c conda-forge -c aihabitat`
 - In another directory:
     - `git clone https://github.com/facebookresearch/habitat-lab.git`
+    - `git checkout tags/v0.3.1`
     - `cd habitat-lab`
     - `pip install -e habitat-lab`
     - `pip install -e habitat-baselines`

@@ -66,10 +66,11 @@ Use the command, `bash scripts/eval/rearrange.sh` to evaluate the trained checkp
 
 
 ## Citation 
-
+```
 @article{harish2024,
   title={Reinforcement Learning via Auxiliary Task Distillation},
-  author={Harish, Abhinav, Heck, Larry, Hanna Josiah, Kira Zsolt and Szot Andrew},
+  author={Harish, Abhinav Narayan, Heck, Larry, Hanna Josiah, Kira Zsolt and Szot Andrew},
   journal={arXiv preprint arXiv:2303.16194},
   year={2023}
 }
+```
